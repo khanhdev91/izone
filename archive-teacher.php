@@ -7,6 +7,13 @@
  * @package izone
  */
 get_header();
+global $post;
+$posts = get_posts([
+    'post_type' => 'teacher',
+    'post_status' => 'publish',
+    'numberposts' => -1,
+    'order' => 'ASC',
+        ]);
 ?>
 <div class="page-title">
     <div class="container">
@@ -34,15 +41,21 @@ get_header();
                                     </p>
                                 </div>
                             </div>
-                            <?php if (have_posts()) : ?>
+                            <?php if ($posts) : ?>
 
                                 <div class="post-detail mb-4">
                                     <div class="list-giangvien">
 
                                         <?php
                                         /* Start the Loop */
-                                        while (have_posts()) :
-                                            the_post();
+                                        foreach ($posts as $post) {
+                                            setup_postdata($post);
+                                            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
+                                            $excerpt = '';
+                                            foreach($excerpt_items as $item) {
+                                                if($item)
+                                                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">'. $item . '</small>';
+                                            }
                                             ?>
                                             <div class="dh-gv-item mb-2">
                                                 <div class="ps-relative mb-3">
@@ -66,15 +79,14 @@ get_header();
                                                         <a href="<?php the_permalink() ?>">
                                                             <span class="text-center d-block mb-1 fs-14 fs-md-17"><?php the_title() ?></span>
                                                         </a>
-                                                        <?php the_excerpt() ?>
+                                                        <small class="h4 font-weight-light text-muted text-truncate-3 text-justify"><?= $excerpt ?></small>
                                                     </h5>
                                                 </div>
                                             </div>
                                             <?php
-                                        endwhile;
+                                        }
                                         ?>
                                     </div>
-                                    <?php sn_comment() ?>
                                 </div>
                                 <?php
                             endif;

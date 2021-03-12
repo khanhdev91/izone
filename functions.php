@@ -52,9 +52,8 @@ add_action('after_setup_theme', 'izone_content_width', 0);
 
 function custom_rewrite()
 {
-    // add_rewrite_rule('^teachers/?$', 'index.php?post_type=teacher', 'top');
-    // add_rewrite_rule('^courses/?$', 'index.php?post_type=course', 'top');
-    // add_rewrite_rule('^tests/?$', 'index.php?post_type=test', 'top');
+    // add_rewrite_rule('^test/category/([^/]*)/?$', 'archive-test.php?category=$1', 'top');
+    // add_rewrite_rule('^test/category/([^/]*)/([^/]*)/?$', 'archive-test.php?category=$2', 'top');
 }
 
 add_action('init', 'custom_rewrite');
@@ -75,7 +74,7 @@ function izone_scripts()
     wp_enqueue_script('jquery.cookie', get_template_directory_uri() . '/assets/lib/cookie/jquery.cookie.js', array(), false, true);
     wp_enqueue_script('bootstrap.bundle', get_template_directory_uri() . '/assets/lib/bootstrap/js/bootstrap.bundle.min.js', array(), false, true);
     wp_enqueue_script('owl.carousel', get_template_directory_uri() . '/assets/lib/owl-carousel/owl.carousel.js', array(), false, true);
-    wp_enqueue_script('main', get_template_directory_uri() . '/assets/App/js/main.js', array(), false, true);
+    wp_enqueue_script('main', get_template_directory_uri() . '/assets/app/js/main.js', array(), false, true);
 }
 
 add_action('wp_enqueue_scripts', 'izone_scripts');
@@ -249,6 +248,210 @@ function test_init()
 }
 
 add_action('init', 'test_init');
+
+function document_init()
+{
+    $labels = array(
+        'name' => _x('Documents', 'Post type general name', 'textdomain'),
+        'singular_name' => _x('Document', 'Post type singular name', 'textdomain'),
+        'menu_name' => _x('Documents', 'Admin Menu text', 'textdomain'),
+        'name_admin_bar' => _x('Document', 'Add New on Toolbar', 'textdomain'),
+        'add_new' => __('Add New', 'textdomain'),
+        'add_new_item' => __('Add New Document', 'textdomain'),
+        'new_item' => __('New Document', 'textdomain'),
+        'edit_item' => __('Edit Document', 'textdomain'),
+        'view_item' => __('View Document', 'textdomain'),
+        'all_items' => __('All Documents', 'textdomain'),
+        'search_items' => __('Search Documents', 'textdomain'),
+        'parent_item_colon' => __('Parent Documents:', 'textdomain'),
+        'not_found' => __('No documents found.', 'textdomain'),
+        'not_found_in_trash' => __('No documents found in Trash.', 'textdomain'),
+        'featured_image' => _x('Document Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'set_featured_image' => _x('Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'use_featured_image' => _x('Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'archives' => _x('Document archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain'),
+        'insert_into_item' => _x('Insert into document', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain'),
+        'uploaded_to_this_item' => _x('Uploaded to this document', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain'),
+        'filter_items_list' => _x('Filter documents list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain'),
+        'items_list_navigation' => _x('Documents list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain'),
+        'items_list' => _x('Documents list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain'),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'document'),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => 4,
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'taxonomies' => array('post_tag', 'category')
+    );
+
+    register_post_type('document', $args);
+}
+
+add_action('init', 'document_init');
+
+function student_init()
+{
+    $labels = array(
+        'name' => _x('Students', 'Post type general name', 'textdomain'),
+        'singular_name' => _x('Student', 'Post type singular name', 'textdomain'),
+        'menu_name' => _x('Students', 'Admin Menu text', 'textdomain'),
+        'name_admin_bar' => _x('Student', 'Add New on Toolbar', 'textdomain'),
+        'add_new' => __('Add New', 'textdomain'),
+        'add_new_item' => __('Add New Student', 'textdomain'),
+        'new_item' => __('New Student', 'textdomain'),
+        'edit_item' => __('Edit Student', 'textdomain'),
+        'view_item' => __('View Student', 'textdomain'),
+        'all_items' => __('All Students', 'textdomain'),
+        'search_items' => __('Search Students', 'textdomain'),
+        'parent_item_colon' => __('Parent Students:', 'textdomain'),
+        'not_found' => __('No students found.', 'textdomain'),
+        'not_found_in_trash' => __('No students found in Trash.', 'textdomain'),
+        'featured_image' => _x('Student Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'set_featured_image' => _x('Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'use_featured_image' => _x('Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'archives' => _x('Student archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain'),
+        'insert_into_item' => _x('Insert into student', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain'),
+        'uploaded_to_this_item' => _x('Uploaded to this student', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain'),
+        'filter_items_list' => _x('Filter students list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain'),
+        'items_list_navigation' => _x('Students list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain'),
+        'items_list' => _x('Students list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain'),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'student'),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => 4,
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'taxonomies' => array('post_tag', 'category')
+    );
+
+    register_post_type('student', $args);
+}
+
+add_action('init', 'student_init');
+
+function add_cover_video_meta_box() {
+    add_meta_box(
+            'cover_video_meta_box',
+            'Cover Video',
+            'show_cover_video_meta_box',
+            'student',
+            'side',
+            'high');
+}
+
+add_action('add_meta_boxes', 'add_cover_video_meta_box');
+
+function show_cover_video_meta_box() {
+    global $post;
+    $meta = get_post_meta($post->ID, 'cover_video_embed', true);
+    echo '
+        <input type="hidden" name="custom_meta_box_nonce" value="' . wp_create_nonce(basename(__FILE__)) . '" />
+        <table class="form-table">
+            <tr>
+                <td>
+                    <input type="url" name="cover_video_embed" id="cover_video_embed" value="' . $meta . '" style="width:100%" />
+                    <br />
+                    <span class="description">Paste your video code here to show a video instead of a featured image.</span>
+                </td>
+            </tr>
+        </table>';
+}
+
+// Save the Data
+function save_cover_video($post_id) {
+    // verify nonce
+    if (!wp_verify_nonce($_POST['custom_meta_box_nonce'], basename(__FILE__)))
+        return $post_id;
+    // check autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return $post_id;
+    // check permissions
+    if (!current_user_can('edit_post', $post_id)) {
+        return $post_id;
+    }
+
+    $old = get_post_meta($post_id, 'cover_video_embed', true);
+    $new = $_POST['cover_video_embed'];
+    if ($new && $new != $old) {
+        update_post_meta($post_id, 'cover_video_embed', $new);
+    } elseif ('' == $new && $old) {
+        delete_post_meta($post_id, 'cover_video_embed', $old);
+    }
+}
+
+add_action('save_post', 'save_cover_video');
+
+function schedule_init()
+{
+    $labels = array(
+        'name' => _x('Schedules', 'Post type general name', 'textdomain'),
+        'singular_name' => _x('Schedule', 'Post type singular name', 'textdomain'),
+        'menu_name' => _x('Schedules', 'Admin Menu text', 'textdomain'),
+        'name_admin_bar' => _x('Schedule', 'Add New on Toolbar', 'textdomain'),
+        'add_new' => __('Add New', 'textdomain'),
+        'add_new_item' => __('Add New Schedule', 'textdomain'),
+        'new_item' => __('New Schedule', 'textdomain'),
+        'edit_item' => __('Edit Schedule', 'textdomain'),
+        'view_item' => __('View Schedule', 'textdomain'),
+        'all_items' => __('All Schedules', 'textdomain'),
+        'search_items' => __('Search Schedules', 'textdomain'),
+        'parent_item_colon' => __('Parent Schedules:', 'textdomain'),
+        'not_found' => __('No schedules found.', 'textdomain'),
+        'not_found_in_trash' => __('No schedules found in Trash.', 'textdomain'),
+        'featured_image' => _x('Schedule Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'set_featured_image' => _x('Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'use_featured_image' => _x('Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain'),
+        'archives' => _x('Schedule archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain'),
+        'insert_into_item' => _x('Insert into schedule', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain'),
+        'uploaded_to_this_item' => _x('Uploaded to this schedule', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain'),
+        'filter_items_list' => _x('Filter schedules list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain'),
+        'items_list_navigation' => _x('Schedules list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain'),
+        'items_list' => _x('Schedules list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain'),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_rest' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'schedule'),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => 4,
+        'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+    );
+
+    register_post_type('schedule', $args);
+}
+
+add_action('init', 'schedule_init');
 
 function custom_menu()
 {
@@ -495,7 +698,7 @@ function list_test_shortcode($args)
                             <li class="top_post_item col-md-3 col-sm-6 col-xs-12">
                                 <div class="frame">
                                     <a href="' . get_the_permalink() . '" title="">
-                                        <img title="" alt="" src="' . (has_post_thumbnail() ? the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
+                                        <img title="" alt="" src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
                                     </a>
                                 </div>
                                 <h3><a class="title title_bold" href="' . get_the_permalink() . '" title="">' . get_the_title() . '</a></h3>
@@ -512,6 +715,179 @@ function list_test_shortcode($args)
 }
 
 add_shortcode('list-test-shortcode', 'list_test_shortcode');
+
+function list_document_shortcode($args)
+{
+    global $post;
+    $posts = get_posts([
+        'post_type' => 'document',
+        'post_status' => 'publish',
+        'numberposts' => 8,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ]);
+    $str = '';
+    if ($posts) {
+        $str .= '
+        <section class="home-test-onine-section py-5 bg-cta-one">
+            <div class="container">
+                <h3 class="display-3 font-bold mb-5 text-center">TÀI LIỆU LUYỆN THI IELTS ONLINE</h3>
+                <ul class="col-botro">';
+        foreach ($posts as $post) {
+            setup_postdata($post);   
+            $str .= '     
+                    <li>
+                        <a href="' .get_the_permalink(). '" title="" class="d-flex align-items-start">
+                            <i class="fa fa-chevron-circle-right text-warning mr-1" aria-hidden="true"></i>
+                            <span class="text-default">' .get_the_title(). '</span>
+                        </a>
+                    </li>
+                    ';
+        }
+        wp_reset_postdata();
+        $str .= '
+                </ul>
+            </div>
+        </section>';
+    }
+    return $str;
+}
+
+add_shortcode('list-document-shortcode', 'list_document_shortcode');
+
+function list_teacher_shortcode($args)
+{
+    global $post;
+    $posts = get_posts([
+        'post_type' => 'teacher',
+        'post_status' => 'publish',
+        'numberposts' => -1,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ]);
+    $str = '';
+    if ($posts) {
+        $str .= '
+        <section class="home-techer-section py-5 hot-gv-home">
+            <div class="container">
+                <div class="mb-4 d-flex align-items-center justify-content-center">
+                    <h3 class="display-3 font-bold mb-3 text-center text-white">ĐỘI HÌNH GIẢNG VIÊN</h3>
+                </div>
+                <div class="gv-slider owl-carousel owl-theme" id="gv-slider">';
+        foreach ($posts as $post) {
+            setup_postdata($post);
+            $excerpt = '';
+            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());  
+            foreach($excerpt_items as $item) {
+                if($item)
+                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">'. $item . '</small>';
+            }
+            $str .= '     
+                    <div class="gv-item">
+                        <div class="card" style="min-height: 349px">
+                            <!-- Card header -->
+                            <!-- Card image -->
+                            <!-- List group -->
+                            <!-- Card body -->
+                            <div class="card-body gv-card-body">
+                                <div class="gv-avatar">
+                                    <img src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' " alt="">
+                                </div>
+                                <div class="pt-4">
+                                    <div class="mb-4 text-center">
+                                        <h5 class="h3 title">
+                                            <span class="d-block mb-1">'. get_the_title() .'</span>
+                                            <small class="h4 font-weight-light text-muted text-truncate-3 text-justify">'. $excerpt . '</small>
+                                        </h5>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="' . get_the_permalink() . '" class="btn m-auto btn-outline-danger">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+        }
+        wp_reset_postdata();
+        $str .= '
+                </div>
+            </div>
+        </section>';
+    }
+    return $str;
+}
+
+add_shortcode('list-teacher-shortcode', 'list_teacher_shortcode');
+
+function list_student_shortcode($args)
+{
+    global $post;
+    $posts = get_posts([
+        'post_type' => 'student',
+        'post_status' => 'publish',
+        'numberposts' => 8,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ]);
+    $str = '';
+    if ($posts) {
+        $str .= '
+        <section class="hs-slider-section py-5">
+            <div class="container">
+                <div class="mb-4 d-flex align-items-center justify-content-center">
+                    <h3 class="display-3 font-bold mb-3 text-center">HỌC VIÊN IZONE</h3>
+                </div>
+                <div class="owl-carousel owl-theme gv-slider" id="hs-slider">';
+        foreach ($posts as $post) {
+            setup_postdata($post);
+            $excerpt = '';
+            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());  
+            foreach($excerpt_items as $item) {
+                if($item)
+                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">'. $item . '</small>';
+            }
+            $cover_video = get_post_meta(get_the_ID(), 'cover_video_embed', true);
+            $str .= '     
+                    <div class="item-video">';
+            if($cover_video)
+                $str .= '       
+                        <div class="video-youtube d-flex flex-column flex-xl-row" data-url="https://www.youtube.com/watch?v=bu2FBl_GzEA">
+                            <div class="youtube-thumb w-100">
+                                <div class="thumb-ratio ratio-16-9">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                        </div>';
+            else
+                $str .= '
+                        <div class="frame">
+                            <img style="height: 260px" title="" alt="" src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
+                        </div>';
+            
+            $str .= '
+                        <div class="pt-3">
+                            <div class="mb-4 text-center">
+                                <h5 class="h3 title">
+                                    <span class="d-block mb-2">' . get_the_title() . '</span>
+                                    <small class="h4 font-weight-light text-muted text-justify">' . $excerpt . '</small>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>';
+        }
+        wp_reset_postdata();
+        $str .= '
+                </div>
+                <div class="mt-4 d-flex justify-content-center mt-4">
+                    <a href="https://www.facebook.com/IELTSIZONE/" class="btn btn btn-outline-info">Xem thêm nhận xét của các học viên khác</a>
+                </div>
+            </div>
+        </section>';
+    }
+    return $str;
+}
+
+add_shortcode('list-student-shortcode', 'list_student_shortcode');
 
 function gutenberg_vinasupport_sample_01_register_block()
 {
@@ -603,3 +979,12 @@ function nav_pagination()
         </ul>
     </nav>';
 }
+
+add_action( 'pre_get_posts', function( $query ){
+    if ( !is_admin() && $query->is_main_query() && is_category() ) {
+        $categories = explode('/', $query->query['category_name']);
+        if($categories[0] == 'test' || $categories[0] == 'student') {
+            $query->set('post_type', $categories[0] );
+        }
+    }
+});

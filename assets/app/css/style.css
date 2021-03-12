@@ -3499,3 +3499,7 @@ body .table-sosanh-phuongphap td, body .table-sosanh-phuongphap th {
 .bg-vocabulary-grammar ul.gw-submenu {
     background: #004b9a;
 }
+
+.not-found {
+    text-align: center;
+}

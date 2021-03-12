@@ -1,6 +1,7 @@
 <?php
+$test_category = get_category_by_slug('test');
 $parent_categories = get_categories([
-    'parent' => false,
+    'parent' => $test_category->term_id,
     'orderby' => 'slug',
     'hide_empty' => false,
     'exclude'=> 1,
@@ -21,14 +22,14 @@ $parent_categories = get_categories([
                             'hide_empty' => false,
                         ]); ?>
                         <li class="arrow-down bg-<?= $parent_category->slug ?>">
-                            <a  href="#" class="gw-menu d-flex align-items-center justify-content-between">
+                            <a  href="<?= get_category_link($parent_category) ?>" class="gw-menu d-flex align-items-center justify-content-between">
                                 <span class="gw-menu-text"><?= $parent_category->slug . ' ' . count($sub_categories) ?> </span>
                                 <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </a>
                             <ul class="gw-submenu">
                                 <?php foreach($sub_categories as $sub_category) { ?> 
                                 <li class="">
-                                    <a title="<?= $sub_category->name ?>" href="#"><?= $sub_category->name ?></a>
+                                    <a title="<?= $sub_category->name ?>" href="<?= get_category_link($sub_category) ?>"><?= $sub_category->name ?></a>
                                 </li>
                                 <?php } ?>
                             </ul>
