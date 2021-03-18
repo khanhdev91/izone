@@ -4,9 +4,7 @@ get_header();
 <div class="page-title">
     <div class="container">
         <ol class="breadcrumb m-0 px-0 py-3">
-            <li class="breadcrumb-item"><a href="<?php echo home_url() ?>" rel="nofollow">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="<?php echo get_post_type_archive_link(get_post_type()) ?>">Đội Hình Giảng viên</a></li>
-            <li class="breadcrumb-item active"><?php echo the_title(); ?></li>
+            <?= generate_breadcrumb() ?>
         </ol>
     </div>
 </div>
@@ -21,6 +19,7 @@ while (have_posts()) :
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <?php if(has_post_thumbnail()): ?>
                                 <div class="p-0 col-12 col-md-10 col-lg-8 m-auto">
                                     <div class="ps-relative mb-3 mt-2 mt-md-3">
                                         <div class="thumb-ratio ratio-1-1">
@@ -30,6 +29,7 @@ while (have_posts()) :
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif; ?>
                                 <div class="article-header mt-3">
                                     <h1 class="text-center">
                                         <?php the_title(); ?>

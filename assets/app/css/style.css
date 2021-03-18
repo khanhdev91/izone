@@ -2025,6 +2025,10 @@ body .text-hover-main:hover{
     display: inline-block;
 }
 
+.bg-tiktok {
+    background: #000000;
+}
+
 .bg-facebook {
     background: #1372cf;
 }

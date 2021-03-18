@@ -18,8 +18,7 @@ $posts = get_posts([
 <div class="page-title">
     <div class="container">
         <ol class="breadcrumb m-0 px-0 py-3">
-            <li class="breadcrumb-item"><a href="<?php echo home_url() ?>" rel="nofollow">Trang chủ</a></li>
-            <li class="breadcrumb-item active">Đội hình giảng viên</li>
+            <?= generate_breadcrumb() ?>
         </ol>
     </div>
 </div>

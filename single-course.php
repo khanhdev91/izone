@@ -4,9 +4,7 @@ get_header();
 <div class="page-title">
     <div class="container">
         <ol class="breadcrumb m-0 px-0 py-3">
-            <li class="breadcrumb-item"><a href="<?php echo home_url() ?>" rel="nofollow">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="<?php echo get_post_type_archive_link(get_post_type())?>">Khóa học</a></li>
-            <li class="breadcrumb-item active"><?php echo the_title(); ?></li>
+            <?= generate_breadcrumb() ?>
         </ol>
     </div>
 </div>
@@ -43,18 +41,10 @@ get_header();
                         the_post();
                         the_content();
                     endwhile;
-
-                    /**
-                     * sidebar
-                     */
-                    if (is_active_sidebar('sidebar-course')) :
-                        ?>
-                        <div class="col-12 col-lg-4">
-                            <?php dynamic_sidebar('sidebar-course'); ?>
-                        </div>
-                        <?php
-                    endif;
-                    ?>                                    
+                    ?>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <?php get_sidebar('course'); ?>
                 </div>
             </div>
         </div>

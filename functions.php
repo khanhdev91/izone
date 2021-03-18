@@ -60,7 +60,7 @@ add_action('init', 'custom_rewrite');
 
 function izone_scripts()
 {
-    wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/lib/font-awesome/css/font-awesome.css');
+    wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/lib/font-awesome/css/all.css');
     wp_enqueue_style('elegant-font', get_template_directory_uri() . '/assets/lib/elegant-font/css/elegant-font.css');
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/lib/bootstrap/css/bootstrap.css');
     wp_enqueue_style('owl.carousel', get_template_directory_uri() . '/assets/lib/owl-carousel/assets/owl.carousel.css');
@@ -351,19 +351,22 @@ function student_init()
 
 add_action('init', 'student_init');
 
-function add_cover_video_meta_box() {
+function add_cover_video_meta_box()
+{
     add_meta_box(
-            'cover_video_meta_box',
-            'Cover Video',
-            'show_cover_video_meta_box',
-            'student',
-            'side',
-            'high');
+        'cover_video_meta_box',
+        'Cover Video',
+        'show_cover_video_meta_box',
+        'student',
+        'side',
+        'high'
+    );
 }
 
 add_action('add_meta_boxes', 'add_cover_video_meta_box');
 
-function show_cover_video_meta_box() {
+function show_cover_video_meta_box()
+{
     global $post;
     $meta = get_post_meta($post->ID, 'cover_video_embed', true);
     echo '
@@ -380,7 +383,8 @@ function show_cover_video_meta_box() {
 }
 
 // Save the Data
-function save_cover_video($post_id) {
+function save_cover_video($post_id)
+{
     // verify nonce
     if (!wp_verify_nonce($_POST['custom_meta_box_nonce'], basename(__FILE__)))
         return $post_id;
@@ -573,7 +577,7 @@ function sn_comment()
             </span>
         </div>
     </div>
-    <?php
+<?php
 }
 
 function list_course_shortcode()
@@ -734,12 +738,12 @@ function list_document_shortcode($args)
                 <h3 class="display-3 font-bold mb-5 text-center">TÀI LIỆU LUYỆN THI IELTS ONLINE</h3>
                 <ul class="col-botro">';
         foreach ($posts as $post) {
-            setup_postdata($post);   
+            setup_postdata($post);
             $str .= '     
                     <li>
-                        <a href="' .get_the_permalink(). '" title="" class="d-flex align-items-start">
+                        <a href="' . get_the_permalink() . '" title="" class="d-flex align-items-start">
                             <i class="fa fa-chevron-circle-right text-warning mr-1" aria-hidden="true"></i>
-                            <span class="text-default">' .get_the_title(). '</span>
+                            <span class="text-default">' . get_the_title() . '</span>
                         </a>
                     </li>
                     ';
@@ -777,10 +781,10 @@ function list_teacher_shortcode($args)
         foreach ($posts as $post) {
             setup_postdata($post);
             $excerpt = '';
-            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());  
-            foreach($excerpt_items as $item) {
-                if($item)
-                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">'. $item . '</small>';
+            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
+            foreach ($excerpt_items as $item) {
+                if ($item)
+                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">' . $item . '</small>';
             }
             $str .= '     
                     <div class="gv-item">
@@ -796,8 +800,8 @@ function list_teacher_shortcode($args)
                                 <div class="pt-4">
                                     <div class="mb-4 text-center">
                                         <h5 class="h3 title">
-                                            <span class="d-block mb-1">'. get_the_title() .'</span>
-                                            <small class="h4 font-weight-light text-muted text-truncate-3 text-justify">'. $excerpt . '</small>
+                                            <span class="d-block mb-1">' . get_the_title() . '</span>
+                                            <small class="h4 font-weight-light text-muted text-truncate-3 text-justify">' . $excerpt . '</small>
                                         </h5>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -841,45 +845,47 @@ function list_student_shortcode($args)
         foreach ($posts as $post) {
             setup_postdata($post);
             $excerpt = '';
-            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());  
-            foreach($excerpt_items as $item) {
-                if($item)
-                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">'. $item . '</small>';
+            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
+            foreach ($excerpt_items as $item) {
+                if ($item)
+                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">' . $item . '</small>';
             }
             $cover_video = get_post_meta(get_the_ID(), 'cover_video_embed', true);
-            $str .= '     
-                    <div class="item-video">';
-            if($cover_video)
+            $str .= '  
+                    <a href="' . get_the_permalink() . '">   
+                        <div class="item-video">';
+            if ($cover_video)
                 $str .= '       
-                        <div class="video-youtube d-flex flex-column flex-xl-row" data-url="https://www.youtube.com/watch?v=bu2FBl_GzEA">
-                            <div class="youtube-thumb w-100">
-                                <div class="thumb-ratio ratio-16-9">
-                                    <img src="" alt="">
+                            <div class="video-youtube d-flex flex-column flex-xl-row" data-url="' . $cover_video . '">
+                                <div class="youtube-thumb w-100">
+                                    <div class="thumb-ratio ratio-16-9">
+                                        <img src="" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                        </div>';
+                            </div>';
             else
                 $str .= '
-                        <div class="frame">
-                            <img style="height: 260px" title="" alt="" src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
-                        </div>';
-            
+                            <div class="frame">
+                                <img style="height: 260px" title="" alt="" src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
+                            </div>';
+
             $str .= '
-                        <div class="pt-3">
-                            <div class="mb-4 text-center">
-                                <h5 class="h3 title">
-                                    <span class="d-block mb-2">' . get_the_title() . '</span>
-                                    <small class="h4 font-weight-light text-muted text-justify">' . $excerpt . '</small>
-                                </h5>
+                            <div class="pt-3">
+                                <div class="mb-4 text-center">
+                                    <h5 class="h3 title">
+                                        <span class="d-block mb-2">' . get_the_title() . '</span>
+                                        <small class="h4 font-weight-light text-muted text-justify">' . $excerpt . '</small>
+                                    </h5>
+                                </div>
                             </div>
                         </div>
-                    </div>';
+                    </a>';
         }
         wp_reset_postdata();
         $str .= '
                 </div>
                 <div class="mt-4 d-flex justify-content-center mt-4">
-                    <a href="https://www.facebook.com/IELTSIZONE/" class="btn btn btn-outline-info">Xem thêm nhận xét của các học viên khác</a>
+                    <a href="' . get_post_type_archive_link('student') . '" class="btn btn btn-outline-info">Xem thêm nhận xét của các học viên khác</a>
                 </div>
             </div>
         </section>';
@@ -980,11 +986,47 @@ function nav_pagination()
     </nav>';
 }
 
-add_action( 'pre_get_posts', function( $query ){
-    if ( !is_admin() && $query->is_main_query() && is_category() ) {
+add_action('pre_get_posts', function ($query) {
+    if (!is_admin() && $query->is_main_query() && is_category()) {
         $categories = explode('/', $query->query['category_name']);
-        if($categories[0] == 'test' || $categories[0] == 'student') {
-            $query->set('post_type', $categories[0] );
+        if ($categories[0] == 'test' || $categories[0] == 'student' || $categories[0] == 'schedule' || $categories[0] == 'document' || $categories[0] == 'teacher') {
+            $query->set('post_type', $categories[0]);
         }
     }
 });
+
+function generate_breadcrumb()
+{
+    global $wp_query;
+    $displayed_post_type = [
+        'test' => 'Luyện Thi IELTS Online',
+        'teacher' => 'Đội hình giảng viên',
+        'course' => 'Khóa học',
+        'document' => 'Tài liệu luyện thi ielts online',
+        'schedule' => 'Lịch khai giảng',
+        'student' => 'Ý kiến học viên'
+    ];
+    $str = '<li class="breadcrumb-item"><a href="' . get_home_url() . '" rel="nofollow">Trang chủ</a></li>';
+    if (is_single()) {
+        $str .= '<li class="breadcrumb-item"><a href="' . get_post_type_archive_link(get_post_type()) . '">' . $displayed_post_type[get_post_type()] . '</a></li>';
+        $str .= '<li class="breadcrumb-item active">' . get_the_title() . '</li>';
+    } else if (is_archive()) {
+        if (is_category()) {
+            $str .= '<li class="breadcrumb-item"><a href="' . get_post_type_archive_link(get_post_type()) . '">' . $displayed_post_type[get_post_type()] . '</a></li>';
+            $categories = explode('/', $wp_query->query['category_name']);
+            foreach ($categories as $i => $category) {
+                if (!isset($displayed_post_type[$category])) {
+                    $category_object = get_category_by_slug($category);
+                    if ($i == count($categories) - 1) {
+                        $str .= '<li class="breadcrumb-item active">' . $category_object->name . '</li>';
+                    } else {
+                        $str .= '<li class="breadcrumb-item"><a href="' .  get_category_link($category_object) . '">' . $category_object->name . '</a></li>';
+                    }
+                }
+            }
+        } else {
+            $str .= '<li class="breadcrumb-item active">' . $displayed_post_type[get_post_type()] . '</li>';   
+        }
+    }
+    echo $str;
+}

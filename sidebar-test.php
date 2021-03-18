@@ -4,7 +4,6 @@ $parent_categories = get_categories([
     'parent' => $test_category->term_id,
     'orderby' => 'slug',
     'hide_empty' => false,
-    'exclude'=> 1,
 ]);
 ?>
 <div class="sidebar-sticky">
