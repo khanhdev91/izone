@@ -141,6 +141,7 @@ function course_init()
         'hierarchical' => false,
         'menu_position' => 4,
         'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'taxonomies' => array('post_tag', 'category')
     );
 
     register_post_type('course', $args);
@@ -191,6 +192,7 @@ function teacher_init()
         'hierarchical' => false,
         'menu_position' => 4,
         'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+        'taxonomies' => array('post_tag', 'category')
     );
 
     register_post_type('teacher', $args);
@@ -583,12 +585,31 @@ function sn_comment()
 function list_course_shortcode()
 {
     global $post;
-    $posts = get_posts([
+    $parent_category = get_category_by_slug('course');
+    if ($parent_category) {
+        $child_categories = get_categories([
+            'parent' => $parent_category->term_id,
+            'orderby' => 'slug',
+            'hide_empty' => false,
+        ]);
+    }
+    $query = [
         'post_type' => 'course',
         'post_status' => 'publish',
         'numberposts' => -1,
         'order' => 'ASC',
-    ]);
+    ];
+    $posts = [];
+    if(!empty($child_categories)) {
+        foreach($child_categories as $child_category) {
+            $query['cat'] = $child_category->term_id;
+            $temp = get_posts($query);
+            $posts = array_merge($posts, $temp);
+        }
+    } else {
+        $temp = get_posts($query);
+        $posts = array_merge($posts, $temp);
+    } 
     $str = '';
     if ($posts) {
         $str .= '
@@ -599,7 +620,7 @@ function list_course_shortcode()
                     <a class="lead-more" href="' . get_post_type_archive_link('course') . '"><span>Xem thêm</span> <i></i></a>
                 </div>
                 <div class="">
-                    <div class="gv-slider owl-carousel owl-theme owl-loaded owl-drag" id="course-slider">';
+                    <div class="owl-carousel owl-theme owl-loaded owl-drag" id="course-slider">';
         $temp = ['danger', 'primary', 'info', 'warning'];
         $i = -1;
         foreach ($posts as $post) {
@@ -622,18 +643,23 @@ function list_course_shortcode()
                                         </div>
                                         <div class="p-4">
                                             <ul class="list-unstyled mb-4">';
-            $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
+            $excerpt_items = [];
+            if(has_excerpt()) {
+                $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
+            }
             foreach ($excerpt_items as $item) {
-                $str .= '
-                                                    <li class="mb-2">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="icon icon-xs icon-shape bg-gradient-' . $temp[$i % 4] . ' text-white shadow rounded-circle"></div>
-                                                            <span class="pl-2 text-sm d-block">' . $item . '</span>
-                                                        </div>
-                                                    </li>';
+                if($item) {
+                    $str .= '
+                                                <li class="mb-2">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="icon icon-xs icon-shape bg-gradient-' . $temp[$i % 4] . ' text-white shadow rounded-circle"></div>
+                                                        <span class="pl-2 text-sm d-block">' . $item . '</span>
+                                                    </div>
+                                                </li>';
+                }
             }
             $str .= '
-                                                </ul>
+                                            </ul>
                                             <a href="' . get_the_permalink() . '" class="btn btn-block btn-' . $temp[$i % 4] . '">Xem chi tiết</a>
                                         </div>
                                     </div>
@@ -775,7 +801,7 @@ function list_teacher_shortcode($args)
         <section class="home-techer-section py-5 hot-gv-home">
             <div class="container">
                 <div class="mb-4 d-flex align-items-center justify-content-center">
-                    <h3 class="display-3 font-bold mb-3 text-center text-white">ĐỘI HÌNH GIẢNG VIÊN</h3>
+                    <h3 class="display-3 font-bold mb-3 text-center text-teacher-title">ĐỘI HÌNH GIẢNG VIÊN</h3>
                 </div>
                 <div class="gv-slider owl-carousel owl-theme" id="gv-slider">';
         foreach ($posts as $post) {
@@ -783,12 +809,17 @@ function list_teacher_shortcode($args)
             $excerpt = '';
             $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
             foreach ($excerpt_items as $item) {
-                if ($item)
-                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">' . $item . '</small>';
+                if ($item) {
+                    $class = ''; 
+                    if(preg_match ('/^\d\.\d(.*)ielts/' , strtolower($item)) || preg_match ('/^ielts(.*)\d\.\d/' , strtolower($item))) {
+                        $class = 'ielts-point'; 
+                    }
+                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-white '. $class .'">' . $item . '</small>';
+                }
             }
             $str .= '     
                     <div class="gv-item">
-                        <div class="card" style="min-height: 349px">
+                        <div class="card">
                             <!-- Card header -->
                             <!-- Card image -->
                             <!-- List group -->
@@ -800,12 +831,12 @@ function list_teacher_shortcode($args)
                                 <div class="pt-4">
                                     <div class="mb-4 text-center">
                                         <h5 class="h3 title">
-                                            <span class="d-block mb-1">' . get_the_title() . '</span>
-                                            <small class="h4 font-weight-light text-muted text-truncate-3 text-justify">' . $excerpt . '</small>
+                                            <span class="mb-1 teacher-name">' . get_the_title() . '</span>
+                                            <small class="mt-4 d-block h4 font-weight-light text-truncate-3 text-justify">' . $excerpt . '</small>
                                         </h5>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <a href="' . get_the_permalink() . '" class="btn m-auto btn-outline-danger">Xem chi tiết</a>
+                                        <a href="' . get_the_permalink() . '" class="btn m-auto btn-outline-white">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>

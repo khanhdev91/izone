@@ -2111,10 +2111,10 @@ body .text-hover-main:hover{
     color: var(--main-color);
 }
 
-.home-course-section .icon-xs {
+.home-course-section,.list-course-section .icon-xs {
     width: 4px;
     height: 4px;
-    padding: 0;
+    padding: 2px;
     font-size: 4px;
     line-height: 4px;
     text-align: center;
@@ -2714,7 +2714,7 @@ body .col-botro li a:hover span{
     background: #97b9c8;
 }
 .hot-gv-home {
-    background-image: url(../images/bn.png);
+    background-color:#FFFFFF;
     background-size: cover;
     background-position: center;
 }
@@ -2726,25 +2726,14 @@ body .col-botro li a:hover span{
 }
 
 .gv-avatar {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
     border-radius: 9999px;
 }
-.gv-card-body:before {
-    content: "";
-    position: absolute;
-    width: 250%;
-    height: 200%;
-    top: -180%;
-    left: -75%;
-    border-radius: 50%;
-    background-color: #df322f;
-    background: linear-gradient(87deg, #fb6340 0, #fbb140 100%) !important;
-    /*background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;*/
-}
+
 .gv-avatar img {
     position: absolute;
     top: 0;
@@ -2758,6 +2747,7 @@ body .col-botro li a:hover span{
 .gv-card-body {
     position: relative;
     overflow: hidden;
+    background-color: #df322f;
 }
 
 
@@ -3233,6 +3223,24 @@ ul.menu-step h3 {
     max-width: 100%;
     padding: 0;
 }
+
+.list-course {
+    display: grid;
+    grid-gap: 12px;
+    justify-content: center;
+}
+
+.list-course.repeat-3 {
+    grid-template-columns: repeat(3,minmax(100px,250px));
+}
+
+.list-course.repeat-4 {
+    grid-template-columns: repeat(4,minmax(100px,250px));
+}
+.list-course.repeat-5 {
+    grid-template-columns: repeat(5,minmax(100px,250px));
+}
+
 .content-750{
     max-width: 750px;
 }
@@ -3506,4 +3514,27 @@ body .table-sosanh-phuongphap td, body .table-sosanh-phuongphap th {
 
 .not-found {
     text-align: center;
+}
+
+.text-teacher-title {
+    color: rgb(209 45 39);
+}
+
+.gv-card-body .teacher-name {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.ielts-point {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.gv-item .card {
+    border-radius: 25px;
 }

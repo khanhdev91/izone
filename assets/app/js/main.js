@@ -201,7 +201,7 @@ jQuery(document).ready(function() {
         autoplayHoverPause: false,
         loop: true,
         dots: true,
-        margin: 24,
+        margin: 50,
         responsive: {
             0: {
                 items: 1,
