@@ -1827,7 +1827,7 @@ body .text-hover-main:hover{
     width: 30px;
     position: fixed;
     bottom: 32px;
-    right: 100px;
+    right: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     text-indent: 100%;
@@ -2111,7 +2111,16 @@ body .text-hover-main:hover{
     color: var(--main-color);
 }
 
-.home-course-section,.list-course-section .icon-xs {
+.home-course-section .icon-xs {
+    width: 4px;
+    height: 4px;
+    padding: 0;
+    font-size: 4px;
+    line-height: 4px;
+    text-align: center;
+}
+
+.list-course-section .icon-xs {
     width: 4px;
     height: 4px;
     padding: 2px;
@@ -2748,6 +2757,7 @@ body .col-botro li a:hover span{
     position: relative;
     overflow: hidden;
     background-color: #df322f;
+    min-height: 450px;
 }
 
 
@@ -2899,7 +2909,7 @@ ul.menu-step h3 {
     z-index: 27;
 }
 .about-izone-post {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -3230,6 +3240,14 @@ ul.menu-step h3 {
     justify-content: center;
 }
 
+.list-course.repeat-1 {
+    grid-template-columns: repeat(1,minmax(100px,250px));
+}
+
+.list-course.repeat-2 {
+    grid-template-columns: repeat(2,minmax(100px,250px));
+}
+
 .list-course.repeat-3 {
     grid-template-columns: repeat(3,minmax(100px,250px));
 }
@@ -3537,4 +3555,19 @@ body .table-sosanh-phuongphap td, body .table-sosanh-phuongphap th {
 
 .gv-item .card {
     border-radius: 25px;
+}
+
+.lead-more-teacher {
+    border-radius: 20px;
+}
+
+.lead-more-teacher i {
+    margin-left: 5px;
+}
+
+.post-cmt {
+    background-color: #ffffff;
+    border: solid 1px #e9ebee;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }

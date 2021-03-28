@@ -535,37 +535,26 @@ function menu($theme_location)
     echo $menu_list;
 }
 
+function fb_metadata() {
+    $str = "";
+    if(is_single() && !is_admin()) {
+        $str .= '
+            <meta property="og:url" content="' . get_permalink() . '" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="' . get_the_title() . '" />
+            <meta property="og:image" content="' . (get_the_post_thumbnail_url() ?? get_template_directory_uri() . '/assets/app/images/noimage.jpg') . '" />
+            <meta property="og:description"   content="' . strip_tags(get_the_excerpt()) . '" />
+        ';
+    }
+    echo $str;
+}
+
 function sn_action()
 {
 ?>
-    <!--    <div class="post-share d-flex justify-content-center">
-            <div class="addthis_inline_share_toolbox" data-url="https://captainvn.github.io/IZONE/canonical_url" data-title="IZONE - Đội hình giảng viên">
-                <div id="atstbx" class="at-share-tbx-element at-share-tbx-native addthis_default_style addthis_20x20_style addthis-smartlayers addthis-animated at4-show">
-                    <a class="addthis_button_facebook_like at_native_button at300b" fb:like:layout="button_count">
-                        <div class="fb-like fb_iframe_widget" data-layout="button_count" data-show_faces="false" data-share="false" data-action="like" data-width="90" data-height="25" data-font="arial" data-href="https://captainvn.github.io/IZONE/canonical_url" data-send="false" style="height: 25px;" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=585028375359473&amp;container_width=0&amp;font=arial&amp;height=25&amp;href=https%3A%2F%2Fcaptainvn.github.io%2FIZONE%2Fcanonical_url&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=false&amp;show_faces=false&amp;width=90">
-                            <span style="vertical-align: bottom; width: 76px; height: 20px;">
-                                <iframe name="f2b20c54f116a5" width="90px" height="25px" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v5.0/plugins/like.php?action=like&amp;app_id=585028375359473&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D45%23cb%3Dffd5a31be5711%26domain%3Dcaptainvn.github.io%26origin%3Dhttps%253A%252F%252Fcaptainvn.github.io%252Ff390234e48d2628%26relation%3Dparent.parent&amp;container_width=0&amp;font=arial&amp;height=25&amp;href=https%3A%2F%2Fcaptainvn.github.io%2FIZONE%2Fcanonical_url&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=false&amp;show_faces=false&amp;width=90" style="border: none; visibility: visible; width: 76px; height: 20px;" class=""></iframe>
-                            </span>
-                        </div>
-                    </a>
-                    <a class="addthis_button_facebook_share at_native_button at300b" fb:share:layout="button_count">
-                        <div class="fb-share-button fb_iframe_widget" data-layout="button_count" data-href="https://captainvn.github.io/IZONE/canonical_url" style="height: 25px;" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=585028375359473&amp;container_width=0&amp;href=https%3A%2F%2Fcaptainvn.github.io%2FIZONE%2Fcanonical_url&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey">
-                            <span style="vertical-align: bottom; width: 86px; height: 20px;">
-                                <iframe name="fe2f620e4a578" width="1000px" height="1000px" title="fb:share_button Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v5.0/plugins/share_button.php?app_id=585028375359473&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D45%23cb%3Df222a880dbff85%26domain%3Dcaptainvn.github.io%26origin%3Dhttps%253A%252F%252Fcaptainvn.github.io%252Ff390234e48d2628%26relation%3Dparent.parent&amp;container_width=0&amp;href=https%3A%2F%2Fcaptainvn.github.io%2FIZONE%2Fcanonical_url&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey" style="border: none; visibility: visible; width: 86px; height: 20px;" class=""></iframe>
-                            </span>
-                        </div>
-                    </a>
-                    <a class="addthis_button_tweet at_native_button at300b"><div class="tweet_iframe_widget" style="width: 62px; height: 25px;">
-                            <span>
-                                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 60px; height: 20px;" title="Twitter Tweet Button" src="https://platform.twitter.com/widgets/tweet_button.7303c29a8108bca4ac5c9ef008ed8164.en.html#dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fcaptainvn.github.io%2FIZONE%2Fgiang-vien--danh-sach.html&amp;size=m&amp;text=IZONE%20-%20%C4%90%E1%BB%99i%20h%C3%ACnh%20gi%E1%BA%A3ng%20vi%C3%AAn%3A&amp;time=1582183323276&amp;type=share&amp;url=https%3A%2F%2Fcaptainvn.github.io%2FIZONE%2Fcanonical_url%23.Xk4zmjnFNNk.twitter" data-url="https://captainvn.github.io/IZONE/canonical_url#.Xk4zmjnFNNk.twitter"></iframe>
-                            </span>
-                        </div>
-                    </a>
-                    <div class="atclear">
-                    </div>
-                </div>
-            </div>
-        </div>-->
+    <div class="post-share d-flex justify-content-center">
+        <div class="fb-like" data-layout="button_count" data-size="large" data-share="true" data-width="450" data-show-faces="true"></div>
+    </div>
 <?php
 }
 
@@ -573,12 +562,9 @@ function sn_comment()
 {
 ?>
     <div class="post-cmt">
-        <div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid_desktop" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="10" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=585028375359473&amp;container_width=1062&amp;height=100&amp;href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2Fcomments%23configurator&amp;locale=vi_VN&amp;numposts=10&amp;sdk=joey&amp;version=v5.0" style="width: 100%;">
-            <span style="vertical-align: bottom; width: 100%; height: 178px;">
-                <iframe name="f174311f68cb664" width="1000px" height="100px" title="fb:comments Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v5.0/plugins/comments.php?app_id=585028375359473&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D45%23cb%3Df37462c591a9ac%26domain%3Dcaptainvn.github.io%26origin%3Dhttps%253A%252F%252Fcaptainvn.github.io%252Ff390234e48d2628%26relation%3Dparent.parent&amp;container_width=1062&amp;height=100&amp;href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2Fcomments%23configurator&amp;locale=vi_VN&amp;numposts=10&amp;sdk=joey&amp;version=v5.0" style="border: none; visibility: visible; width: 100%; height: 178px;" class=""></iframe>
-            </span>
-        </div>
+        <div class="fb-comments" data-href="<?php the_permalink(); ?>" loading="lazy" data-numposts="10" width="100%" data-colorscheme="light" data-version="v2.3"></div>
     </div>
+
 <?php
 }
 
@@ -620,7 +606,7 @@ function list_course_shortcode()
                     <a class="lead-more" href="' . get_post_type_archive_link('course') . '"><span>Xem thêm</span> <i></i></a>
                 </div>
                 <div class="">
-                    <div class="owl-carousel owl-theme owl-loaded owl-drag" id="course-slider">';
+                    <div class="gv-slider owl-carousel owl-theme owl-loaded owl-drag" id="course-slider">';
         $temp = ['danger', 'primary', 'info', 'warning'];
         $i = -1;
         foreach ($posts as $post) {
@@ -836,7 +822,7 @@ function list_teacher_shortcode($args)
                                         </h5>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <a href="' . get_the_permalink() . '" class="btn m-auto btn-outline-white">Xem chi tiết</a>
+                                        <a href="' . get_the_permalink() . '" class="btn m-auto btn-outline-white lead-more-teacher">Xem chi tiết<i class="fa fa-angle-right"></i></a>
                                     </div>
                                 </div>
                             </div>

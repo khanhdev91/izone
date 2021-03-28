@@ -7,10 +7,19 @@ $color = $temp[rand(0,3)];
     <div class="card-header p-2">
         <h5 class="h3 mb-0 fs-14 fs-md-17 text-center"><?php the_title() ?></h5>
     </div>
+    <?php sn_action(); ?>
     <div class="card-body p-2">
+        <?php
+        if(is_single()) {
+            if(has_post_thumbnail()) {
+        ?>
         <div class="">
-            <img src="Assets/App/images/khoahoc/1.jpg" alt="">
+            <img src="<?= get_the_post_thumbnail_url() ?>" alt="">
         </div>
+        <?php
+            }
+        }
+        ?>
         <div class="p-3">
             <ul class="list-unstyled mb-0">
                 <?php foreach ($excerpt_items as $item) { ?>

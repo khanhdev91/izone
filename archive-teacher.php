@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying archive pages
  *
@@ -13,7 +14,7 @@ $posts = get_posts([
     'post_status' => 'publish',
     'numberposts' => -1,
     'order' => 'ASC',
-        ]);
+]);
 ?>
 <div class="page-title">
     <div class="container">
@@ -24,7 +25,7 @@ $posts = get_posts([
 </div>
 <section class="main_page_colum_layout">
     <section class="news_post_main">
-        <div class="container">
+        <div class="container list-teacher-page">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -33,7 +34,6 @@ $posts = get_posts([
                                 <h1 class="text-center">
                                     CHÂN DUNG GIẢNG VIÊN IZONE
                                 </h1>
-                                <?php sn_action() ?>
                                 <div class="post-sumary text-center mb-4 content-750 mx-auto">
                                     <!-- get post-sumary form backend -->
                                     <p>IZONE - IELTS Chiến Lược với đội ngũ giảng viên có trình độ chuyên môn cao và sự tận tâm trong công việc đã không ngừng nỗ lực, đào tạo hơn 10.000 học viên trong suốt 5 năm hoạt động. Chúng ta cùng tìm hiểu về những con người đã tạo nên sự thành công của IZONE ngày hôm nay.
@@ -47,16 +47,18 @@ $posts = get_posts([
 
                                         <?php
                                         /* Start the Loop */
+                                        $i = 0;
                                         foreach ($posts as $post) {
+                                            $i++;
                                             setup_postdata($post);
                                             $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
                                             $excerpt = '';
-                                            foreach($excerpt_items as $item) {
-                                                if($item)
-                                                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">'. $item . '</small>';
+                                            foreach ($excerpt_items as $item) {
+                                                if ($item)
+                                                    $excerpt .= '<small class="text-center d-block mb-0 h4 font-weight-normal text-muted">' . $item . '</small>';
                                             }
-                                            ?>
-                                            <div class="dh-gv-item mb-2">
+                                        ?>
+                                            <div class="dh-gv-item mb-2 <?= $i > 9 ? 'hidden' : '' ?>">
                                                 <div class="ps-relative mb-3">
                                                     <div class="thumb-ratio ratio-1-1">
                                                         <a href="<?php the_permalink() ?>">
@@ -67,7 +69,7 @@ $posts = get_posts([
                                                             if (has_post_thumbnail()) {
                                                                 echo '<img src="' . get_the_post_thumbnail_url() . '" alt="">';
                                                             } else {
-                                                                echo '<img src="'.get_template_directory_uri() . '/assets/app/images/teacher.jpg" alt="">';
+                                                                echo '<img src="' . get_template_directory_uri() . '/assets/app/images/teacher.jpg" alt="">';
                                                             }
                                                             ?>
                                                         </a>
@@ -82,12 +84,21 @@ $posts = get_posts([
                                                     </h5>
                                                 </div>
                                             </div>
-                                            <?php
+                                        <?php
                                         }
                                         ?>
                                     </div>
+                                    <?php
+                                    if($i > 9) {
+                                    ?>
+                                    <div class="d-flex justify-content-center mb-4">
+                                        <a href="javascript:void(0)" class="btn btn-warning list-more-teacher">XEM THÊM</a>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
-                                <?php
+                            <?php
                             endif;
                             ?>
                         </div>

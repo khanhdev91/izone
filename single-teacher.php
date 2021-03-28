@@ -20,7 +20,7 @@ while (have_posts()) :
                         <div class="card">
                             <div class="card-body">
                                 <?php if(has_post_thumbnail()): ?>
-                                <div class="p-0 col-12 col-md-10 col-lg-8 m-auto">
+                                <div class="p-0 col-12 col-md-10 col-lg-10 m-auto">
                                     <div class="ps-relative mb-3 mt-2 mt-md-3">
                                         <div class="thumb-ratio ratio-1-1">
                                             <a href="#">
@@ -38,16 +38,14 @@ while (have_posts()) :
                                 </div>
                                 <div class="post-detail mb-4">
                                     <!-- get post form backend -->
-
-                                    <div class="p-0 col-12 col-md-8 col-lg-6 m-auto">
+                                    <div class="p-0 col-12 col-md-12 col-lg-10 m-auto">
                                         <div class="pre-line text-justify d-block">
                                             <?php the_content(); ?>
                                         </div>
                                     </div>
                                 </div>
-                                <?php sn_comment() ?>
                             </div>
-                        </div>                                  
+                        </div>
                     </div>
                 </div>
             </div>

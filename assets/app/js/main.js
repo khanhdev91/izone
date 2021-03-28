@@ -15,16 +15,6 @@ function body_padding_top() {
 }
 
 function show_popup() {
-    if ($.cookie('cookie_popup') == undefined) {
-        $('.cookie-popup-wrap').fadeIn(600);
-        $.cookie('cookie_popup', true, {
-            expires: 7 //số ngày hiện lại
-        });
-    };
-    $('#closepopup').click(function(e) {
-        e.preventDefault();
-        $('.cookie-popup-wrap').fadeOut(600);
-    });
     cookie_popup = (function() {
         if ($.cookie('cookie_popup') == undefined) {
             $('.cookie-popup-wrap').fadeIn(600);
@@ -37,9 +27,10 @@ function show_popup() {
             $('.cookie-popup-wrap').fadeOut(600);
         });
     });
+    
     setTimeout(function() {
         cookie_popup();
-    }, 1000); //số miligiây hiện popup sau khi vào trang: 1000 = 1s | 3 phút = 180000
+    }, 1000*parseInt($('.cookie-popup-wrap').attr('open-after')) || 1000); //số miligiây hiện popup sau khi vào trang: 1000 = 1s | 3 phút = 180000
 }
 
 //var hT = $('.header-top').offset().top;
@@ -201,7 +192,7 @@ jQuery(document).ready(function() {
         autoplayHoverPause: false,
         loop: true,
         dots: true,
-        margin: 50,
+        margin: 60,
         responsive: {
             0: {
                 items: 1,
@@ -445,3 +436,10 @@ $(window).scroll(function() {
 });
 
 $('div.menu,div.mobilenav-inner').find('li.active').parents('li').addClass('active');
+
+$(document).ready(function() {
+    $('.list-teacher-page a.list-more-teacher').click(function() {
+        $('.list-teacher-page .dh-gv-item.hidden').fadeIn();
+        $('.list-teacher-page a.list-more-teacher').remove();
+    })
+});

@@ -19,6 +19,7 @@ get_header();
                                 <h1 class="text-center">
                                     <?php the_title(); ?>
                                 </h1>
+                                <?php sn_action(); ?>
                             </div>
                             <?php if (get_the_post_thumbnail_url()) : ?>
                                 <div class="p-0 col-12 col-md-10 col-lg-9 m-auto">
@@ -62,6 +63,9 @@ get_header();
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-lg-3 order-0 order-lg-1">
+                    <?php get_sidebar('test'); ?>
                 </div>
             </div>
         </div>

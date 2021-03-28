@@ -30,6 +30,7 @@ get_header();
                                 }
                                 ?>
                             </div>
+                            <?php sn_action(); ?>
                             <div class="card-body">
                                 <div class="post-detail mb-4">
                                     <div class="mt-16 about-izone-post">
@@ -37,9 +38,6 @@ get_header();
                                         the_content();
                                         ?>
                                     </div>
-                                </div>
-                                <div class="post-cmt">
-                                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="10"></div>
                                 </div>
                             </div>
                         </div>

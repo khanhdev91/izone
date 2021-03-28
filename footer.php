@@ -1,5 +1,14 @@
 </div>
 </section>
+<?php 
+if((is_single() || is_page()) && !is_admin()) {
+?>
+<div class="container">
+    <?php sn_comment(); ?>
+</div>
+<?php
+}
+?>
 <footer class="theme-footer">
     <div class="container">
         <div class="inner-wrapper">
