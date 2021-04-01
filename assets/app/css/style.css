@@ -3571,3 +3571,69 @@ body .table-sosanh-phuongphap td, body .table-sosanh-phuongphap th {
     border-radius: 5px;
     margin-bottom: 10px;
 }
+
+.social-tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+.social-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -57px;
+}
+  
+.social-tooltip .tooltiptext::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: black transparent transparent transparent;
+}
+
+.social-tooltip:hover .tooltiptext {
+visibility: visible;
+}
+
+.sidebar-sticky .card {
+    border-radius: 0px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.sidebar-sticky .card ul.gw-nav-list {
+    margin-bottom: 0;
+}
+
+.sidebar-sticky .card .gv-card-body {
+    min-height: unset;
+    background-color: #ffffff;
+}
+
+.sidebar-sticky .card .gv-card-body .ielts-point {
+    font-size: 16px;
+}
+
+.sidebar-sticky .card .gv-card-body .gv-avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.sidebar-sticky .card .gv-card-body .teacher-name {
+    background: unset;
+    border-radius: unset;
+    padding: unset;
+    font-size: 16px;
+}

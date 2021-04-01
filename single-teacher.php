@@ -16,7 +16,7 @@ while (have_posts()) :
         <section class="news_post_main">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 col-lg-9 order-1 order-lg-0">
                         <div class="card">
                             <div class="card-body">
                                 <?php if(has_post_thumbnail()): ?>
@@ -34,19 +34,22 @@ while (have_posts()) :
                                     <h1 class="text-center">
                                         <?php the_title(); ?>
                                     </h1>
-                                    <?php sn_action() ?>
                                 </div>
                                 <div class="post-detail mb-4">
                                     <!-- get post form backend -->
                                     <div class="p-0 col-12 col-md-12 col-lg-10 m-auto">
-                                        <div class="pre-line text-justify d-block">
+                                        <div class="text-justify d-block">
                                             <?php the_content(); ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div><?php sn_action(); ?></div>
                     </div>
+                    <div class="col-12 col-lg-3 order-0 order-lg-1">
+                    <?php get_sidebar('teacher'); ?>
+                </div>
                 </div>
             </div>
         </section>

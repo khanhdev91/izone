@@ -30,7 +30,6 @@ get_header();
                                 }
                                 ?>
                             </div>
-                            <?php sn_action(); ?>
                             <div class="card-body">
                                 <div class="post-detail mb-4">
                                     <div class="mt-16 about-izone-post">
@@ -41,6 +40,7 @@ get_header();
                                 </div>
                             </div>
                         </div>
+                        <div><?php sn_action(); ?></div>
                         <?php
                     endwhile;
                     ?>

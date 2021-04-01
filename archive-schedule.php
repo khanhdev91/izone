@@ -42,7 +42,7 @@ get_header();
                 </div>
                 <?php endif; ?>
                 <div class="col-12 col-lg-3 order-0 order-lg-1">
-                    <?php get_sidebar('test'); ?>
+                    <?php get_sidebar('schedule'); ?>
                 </div>
             </div>
         </div>

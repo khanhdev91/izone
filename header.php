@@ -30,10 +30,11 @@
             }
             js = d.createElement(s);
             js.id = id;
-            js.src = "https://connect.facebook.net/vi_VN/sdk.js";
+            js.src = "https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <div class="fb-customerchat" attribution="setup_tool" page_id="106253867468828">
     </div>
     <div class="wrapper-container mobilenav-wrapper header-fixed">
         <div id="page-wrapper">

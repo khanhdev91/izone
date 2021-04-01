@@ -1,10 +1,10 @@
 </div>
 </section>
 <?php 
-if((is_single() || is_page()) && !is_admin()) {
+if((is_single() || is_page()) && !is_front_page() && !is_admin()) {
 ?>
 <div class="container">
-    <?php sn_comment(); ?>
+        <?php sn_comment(); ?>
 </div>
 <?php
 }
@@ -77,14 +77,9 @@ if((is_single() || is_page()) && !is_admin()) {
     wp_reset_postdata();
     ?>
 </div>
-<a href="javascript:void(0);" class="cd-top">Top</a>
-
 <?php echo do_shortcode('[sc name="cookie-popup" logo="' . esc_url(wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0]) . '"]'); ?>
 
 <?php wp_footer(); ?>
-<!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5de78fb38192bc45"></script> -->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=585028375359473&autoLogAppEvents=1"></script>
 </body>
 
 </html>
