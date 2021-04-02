@@ -2,6 +2,7 @@
 </section>
 <?php 
 if((is_single() || is_page()) && !is_front_page() && !is_admin()) {
+    set_post_view();
 ?>
 <div class="container">
         <?php sn_comment(); ?>

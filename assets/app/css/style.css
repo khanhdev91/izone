@@ -3638,17 +3638,6 @@ visibility: visible;
     font-size: 16px;
 }
 
-@media only screen and (max-width: 600px) {
-    .page-title {
-        margin-top: 15px;
-    }
-    .page-title .breadcrumb {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .sidebar-detail {
-        display: none;
-    }
+.related-tests {
+    padding: 10px;
 }

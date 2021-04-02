@@ -482,16 +482,19 @@ function menu($theme_location)
             $menu_list .= '<ul>' . "\n";
 
         $count = 0;
-        $submenu = false;
+        $submenu1 = false;
+        $submenu2 = false;
+        $level1_id = null;
+        $level2_id = null;
         foreach ($menu_items as $menu_item) {
             $currentClass = ($menu_item->object_id == get_queried_object_id()) ? 'active' : '';
             $link = $menu_item->url;
             $title = $menu_item->title;
 
             if (!$menu_item->menu_item_parent) {
-                $parent_id = $menu_item->ID;
+                $level1_id = $menu_item->ID;
                 $menu_list .= '<li class="' . $currentClass . '">' . "\n";
-                if ($menu_items[$count + 1]->menu_item_parent == $parent_id) {
+                if ($menu_items[$count + 1]->menu_item_parent == $level1_id) {
                     if ($theme_location == 'main-menu')
                         $menu_list .= '<a title="" class="d-flex justify-content-between align-items-center" href="' . $link . '">' . $title . '<i class="fa fa-angle-down ml-2" aria-hidden="true"></i></a>' . "\n";
                     else if ($theme_location == 'mobile-menu')
@@ -501,10 +504,23 @@ function menu($theme_location)
                 }
             }
 
-            if ($parent_id == $menu_item->menu_item_parent) {
+            if ($level1_id == $menu_item->menu_item_parent) {
+                $level2_id = $menu_item->ID;
+                if (!$submenu1) {
+                    $submenu1 = true;
+                    if ($theme_location == 'main-menu')
+                        $menu_list .= '<ul class="list-unstyled">' . "\n";
+                    else if ($theme_location == 'mobile-menu')
+                        $menu_list .= '<ul>' . "\n";
+                }
 
-                if (!$submenu) {
-                    $submenu = true;
+                $menu_list .= '<li class="' . $currentClass . '">' . "\n";
+                $menu_list .= '<a title="" class="" href="' . $link . '">' . $title . '</a>' . "\n";
+            }
+
+            if ($level2_id == $menu_item->menu_item_parent) {
+                if (!$submenu2) {
+                    $submenu2 = true;
                     if ($theme_location == 'main-menu')
                         $menu_list .= '<ul class="list-unstyled">' . "\n";
                     else if ($theme_location == 'mobile-menu')
@@ -514,18 +530,18 @@ function menu($theme_location)
                 $menu_list .= '<li class="' . $currentClass . '">' . "\n";
                 $menu_list .= '<a title="" class="" href="' . $link . '">' . $title . '</a>' . "\n";
                 $menu_list .= '</li>' . "\n";
-
-
-                if ($menu_items[$count + 1]->menu_item_parent != $parent_id && $submenu) {
-                    $menu_list .= '</ul>' . "\n";
-                    $submenu = false;
-                }
             }
 
-            if ($menu_items[$count + 1]->menu_item_parent != $parent_id) {
-                $menu_list .= '</li>' . "\n";
-                $submenu = false;
+            if($level2_id && $submenu2 && (!isset($menu_items[$count + 1]) || $menu_items[$count + 1]->menu_item_parent != $level2_id)) {
+                $menu_list .= '</ul></li>' . "\n";
+                $submenu2 = false;
             }
+
+            if($level1_id && $submenu1 && (!isset($menu_items[$count + 1]) || ($menu_items[$count + 1]->menu_item_parent != $level1_id && $menu_items[$count + 1]->menu_item_parent != $level2_id))) {
+                $menu_list .= '</ul></li>' . "\n";
+                $submenu1 = false;
+            }
+
 
             $count++;
         }
@@ -628,7 +644,7 @@ function list_course_shortcode()
             $str .= '
                                         </div>
                                         <div class="p-4">
-                                            <ul class="list-unstyled mb-4">';
+                                            <ul class="list-unstyled mb-4 hide-on-mobile">';
             $excerpt_items = [];
             if(has_excerpt()) {
                 $excerpt_items = preg_split("/\r\n|\n|\r/", get_the_excerpt());
@@ -764,6 +780,9 @@ function list_document_shortcode($args)
         $str .= '
                 </ul>
             </div>
+            <div class="mt-4 d-flex justify-content-center mt-4">
+            <a href="' . get_post_type_archive_link('document') . '" class="btn btn btn-outline-warning">Xem thêm</a>
+        </div>
         </section>';
     }
     return $str;
@@ -1029,7 +1048,7 @@ function generate_breadcrumb()
         $str .= '<li class="breadcrumb-item active">' . get_the_title() . '</li>';
     } else if (is_archive()) {
         if (is_category()) {
-            $str .= '<li class="breadcrumb-item"><a href="' . get_post_type_archive_link(get_post_type()) . '">' . $displayed_post_type[get_post_type()] . '</a></li>';
+            $str .= '<li class="breadcrumb-item"><a href="' . get_post_type_archive_link($wp_query->query_vars['post_type']) . '">' . $displayed_post_type[$wp_query->query_vars['post_type']] . '</a></li>';
             $categories = explode('/', $wp_query->query['category_name']);
             foreach ($categories as $i => $category) {
                 if (!isset($displayed_post_type[$category])) {
@@ -1042,7 +1061,7 @@ function generate_breadcrumb()
                 }
             }
         } else {
-            $str .= '<li class="breadcrumb-item active">' . $displayed_post_type[get_post_type()] . '</li>';   
+            $str .= '<li class="breadcrumb-item active">' . $displayed_post_type[$wp_query->query_vars['post_type']] . '</li>';   
         }
     }
     echo $str;
@@ -1052,7 +1071,9 @@ function generate_breadcrumb()
 //cout view post
 function get_post_view() {
     $count = get_post_meta( get_the_ID(), 'post_views_count', true );
-    return "$count views";
+    if($count)
+        return $count;
+    else return 0;
 }
 function set_post_view() {
     $key = 'post_views_count';

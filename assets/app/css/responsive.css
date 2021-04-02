@@ -78,6 +78,10 @@
 
 }
 @media(max-width:767px) {
+    .sidebar-detail {
+        display: none;
+    }
+
     .theme-footer .top-footer-data-wrapper {
         padding-bottom: 0;
     }
@@ -144,6 +148,17 @@
 @media (min-width:576px) {
 }
 @media (max-width:575px) {
+    .page-title {
+        margin-top: 15px;
+    }
+    .page-title .breadcrumb {
+        display: none;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+    
     .gv-slider .owl-nav .owl-next {
         right: 5px;
     }
