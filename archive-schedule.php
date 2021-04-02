@@ -41,7 +41,7 @@ get_header();
                     </div>
                 </div>
                 <?php endif; ?>
-                <div class="col-12 col-lg-3 order-0 order-lg-1">
+                <div class="col-12 col-lg-3 order-0 order-lg-1 sidebar-detail">
                     <?php get_sidebar('schedule'); ?>
                 </div>
             </div>

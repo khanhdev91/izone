@@ -12,7 +12,7 @@ get_header();
     <section class="news_post_main">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-9 order-1 order-lg-0">
+                <div class="col-12 col-lg-9 order-0 order-lg-0">
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="article-header">
@@ -64,7 +64,7 @@ get_header();
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3 order-0 order-lg-1 sidebar-detail">
+                <div class="col-12 col-lg-3 order-1 order-lg-1">
                     <?php get_sidebar('schedule'); ?>
                 </div>
             </div>
