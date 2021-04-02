@@ -29,7 +29,7 @@ $most_view_tests = get_posts($conditions);
 <div class="sidebar-sticky">
     <div class="card">
         <div class="card-header py-2 text-center">
-            <h5 class="h3 mb-0">Các bài viết liên quan</h5>
+            <h5 class="h3 mb-0">Bài viết liên quan</h5>
         </div>
         <div class="card-body p-0">
             <ul class="gw-nav gw-nav-list">
@@ -60,7 +60,7 @@ $most_view_tests = get_posts($conditions);
     </div>
     <div class="card mt-4">
         <div class="card-header py-2 text-center">
-            <h5 class="h3 mb-0">Các bài viết được quan tâm</h5>
+            <h5 class="h3 mb-0">Bài viết được quan tâm</h5>
         </div>
         <div class="card-body p-0">
             <ul class="gw-nav gw-nav-list">

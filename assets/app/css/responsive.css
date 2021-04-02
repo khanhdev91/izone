@@ -158,7 +158,72 @@
     .hide-on-mobile {
         display: none;
     }
-    
+   
+    .cta-one__image-wrap {
+        padding-right: 0;
+    }
+
+    .cta-one__content {
+        text-align: center;
+    }
+
+    .cta-one__btn {
+        margin-top: 10px;
+    }
+
+    .home-test-onine-section {
+        padding-bottom: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .home-test-onine-section h3 {
+        margin-bottom: 0 !important;
+    }
+
+    .home-test-onine-section .mt-4 {
+        margin-top: 0 !important;
+    }
+
+    .home-test-onine-section .col-botro {
+        grid-gap: 5px;
+    }
+
+    .home-course-section .mb-4 {
+        margin-bottom: 0 !important;
+    }
+
+    .home-course-section .p-4 {
+        padding: 0.5rem !important;
+    }
+
+    .home-course-section .owl-theme .owl-nav {
+        margin-top: 0 !important;
+    }
+
+    .home-techer-section {
+        padding-bottom: 1.5rem !important;
+    }
+
+    .home-techer-section .mb-4 {
+        margin-bottom: 0 !important;
+    }
+
+    .home-techer-section .gv-item .card {
+        margin-bottom: 0;
+    }
+
+    .hs-slider-section {
+        padding-top: 0 !important;
+    }
+
+    .hs-slider-section .mb-4 {
+        margin-bottom: 0 !important;
+    }
+
+    .hs-slider-section .owl-theme .owl-nav {
+        margin-top: 0 !important;
+    }
+
     .gv-slider .owl-nav .owl-next {
         right: 5px;
     }
