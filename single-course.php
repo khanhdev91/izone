@@ -43,7 +43,7 @@ get_header();
                     endwhile;
                     ?>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 sidebar-detail">
                     <?php get_sidebar('course'); ?>
                 </div>
             </div>

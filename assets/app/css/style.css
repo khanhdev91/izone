@@ -20,7 +20,6 @@ body {
     position: relative;
 }
 
-
 a:hover, a:focus {
     color: #da4232;
     text-decoration: none;
@@ -3637,4 +3636,19 @@ visibility: visible;
     border-radius: unset;
     padding: unset;
     font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+    .page-title {
+        margin-top: 15px;
+    }
+    .page-title .breadcrumb {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .sidebar-detail {
+        display: none;
+    }
 }
