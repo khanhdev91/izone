@@ -26,7 +26,7 @@ function show_popup() {
             e.preventDefault();
             $('.cookie-popup-wrap').fadeOut(600);
         });
-    });
+    })
     
     setTimeout(function() {
         cookie_popup();
@@ -66,10 +66,6 @@ jQuery(document).ready(function() {
         show_popup();
     }
     check_over();
-
-
-
-
 
     function makeTimer() {
         jQuery('.izone-timer').each(function(){

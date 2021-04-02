@@ -2876,7 +2876,8 @@ ul.menu-step h3 {
     padding-right: .5rem;
     content: '\f105';
     color: #8898aa;
-    font: normal normal normal 14px/1 FontAwesome;
+    font-weight: 900;
+    font-family: 'Font Awesome\ 5 Free';
 }
 .breadcrumb-item a, .breadcrumb-item.active {
     color: #8898aa;
