@@ -902,7 +902,7 @@ function list_student_shortcode($args)
             else
                 $str .= '
                             <div class="frame">
-                                <img style="height: 260px" title="" alt="" src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
+                                <img title="" alt="" src="' . (has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri() . '/assets/app/images/noimage.jpg') . ' ">
                             </div>';
 
             $str .= '

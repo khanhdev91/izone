@@ -3641,3 +3641,11 @@ visibility: visible;
 .related-tests {
     padding: 10px;
 }
+
+.wp-block-group.navbar .wp-block-group__inner-container {
+    width: 100%;
+}
+
+.wp-block-image img {
+    height: auto;
+}
