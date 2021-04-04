@@ -931,19 +931,6 @@ function list_student_shortcode($args)
 
 add_shortcode('list-student-shortcode', 'list_student_shortcode');
 
-function gutenberg_vinasupport_sample_01_register_block()
-{
-    wp_register_script(
-        'gutenberg-examples-01',
-        get_template_directory_uri() . '/blocks/gutenberg-examples-01.js',
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor')
-    );
-    register_block_type('gutenberg-examples/example-01', array(
-        'editor_script' => 'gutenberg-examples-01',
-    ));
-}
-//add_action( 'init', 'gutenberg_vinasupport_sample_01_register_block' );
-
 function nav_pagination()
 {
     if (is_singular())
