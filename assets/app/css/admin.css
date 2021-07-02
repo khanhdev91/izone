@@ -1,0 +1,17 @@
+.ielts-multi-cards {
+    border: 5px solid #01d1a4;
+    padding: 0 10px;
+}
+
+.ielts-card {
+    border: 1px solid #01d1a4;
+    padding: 0 10px;
+}
+
+.ielts-card .upside .step1 {
+    border-right: 1px solid #01d1a4;
+}
+
+.ielts-multi-cards .downside {
+    border-top: 1px solid #01d1a4;
+}

@@ -3649,3 +3649,108 @@ visibility: visible;
 .wp-block-image img {
     height: auto;
 }
+
+.ielts-multi-cards .page{
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	background: linear-gradient(to bottom right, aqua, lightblue);
+}
+
+.ielts-multi-cards > .wp-block-group__inner-container .page{
+	-webkit-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	-ms-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	-o-box-shadow:0 0 20px rgba(0,0,0,0.2);
+	box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.ielts-multi-cards .page img{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin:0;
+}
+
+.ielts-multi-cards .shadow{
+	-webkit-transition: -webkit-box-shadow 0.5s;
+	-moz-transition: -moz-box-shadow 0.5s;
+	-o-transition: -webkit-box-shadow 0.5s;
+	-ms-transition: -ms-box-shadow 0.5s;
+
+	-webkit-box-shadow:0 0 20px #ccc;
+	-moz-box-shadow:0 0 20px #ccc;
+	-o-box-shadow:0 0 20px #ccc;
+	-ms-box-shadow:0 0 20px #ccc;
+	box-shadow:0 0 20px #ccc;
+}
+
+.ielts-multi-cards .ielts-card {
+	background-size:100% 100%;
+}
+
+.ielts-multi-cards .upside {
+	padding: 2em 2em 0 2em;
+	display: block;
+}
+
+.ielts-multi-cards .step1 {
+	width: 50%;
+	height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
+	box-shadow: 1em 1em 2em rgb(0 0 0 / 20%);
+	border-radius: 5px;
+	color: #ffffff;
+}
+
+.ielts-multi-cards .step1 .translate-btn-group {
+	position: sticky;
+	bottom: 0;
+}
+
+.ielts-multi-cards .step2 {
+	width: 50%;
+	height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	background-image: linear-gradient(to right bottom, #2998FF, #5643FA);
+	box-shadow: 1em 1em 2em rgb(0 0 0 / 20%);
+	border-radius: 5px;
+	color: #ffffff;
+	display: none;
+}
+
+.ielts-multi-cards .downside {
+	padding: 0em 2em 2em 2em;
+}
+
+.ielts-multi-cards .step3 {
+	height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	background-image: linear-gradient(to right bottom, #FFB900, #FF7730);
+	box-shadow: 1em 1em 2em rgb(0 0 0 / 20%);
+	border-radius: 5px;
+	display: none;
+}
+
+.step1::-webkit-scrollbar {
+    display: none;
+}
+.step2::-webkit-scrollbar {
+    display: none;
+}
+.step3::-webkit-scrollbar {
+    display: none;
+}
+

@@ -439,3 +439,38 @@ $(document).ready(function() {
         $('.list-teacher-page a.list-more-teacher').remove();
     })
 });
+
+//ielts multi cards
+$(document).ready(function() {
+    function loadIeltsMultiCards() {
+        var flipbook = $('.ielts-multi-cards > .wp-block-group__inner-container');
+        if (flipbook.width()==0 || flipbook.height()==0) {
+            setTimeout(loadIeltsMultiCards, 10);
+            return;
+        }
+        $('.ielts-multi-cards > .wp-block-group__inner-container').turn({
+                display: 'single',
+                elevation: 50,
+                gradients: true,
+                autoCenter: true,
+                width: '100%',
+                height: '580px'
+        });
+
+        $('.ielts-multi-cards > .wp-block-group__inner-container').turn('peel', 'tr');
+    }
+    yepnope({
+        test : Modernizr.csstransforms,
+        yep: ['/wp-content/themes/izone/assets/lib/turnjs4/lib/turn.min.js'],
+        nope: ['/wp-content/themes/izone/assets/lib/turnjs4/lib/turn.html4.min.js'],
+        both: ['/wp-content/themes/izone/assets/lib/turnjs4/lib/scissor.min.js'],
+        complete: loadIeltsMultiCards
+    });
+    $('.ielts-multi-cards .translate-btn').click(function() {
+        let ieltsCard = $(this).closest('.ielts-card');
+        ieltsCard.find('.upside').css('display', 'flex');
+        ieltsCard.find('.step2').show('slide');
+        ieltsCard.find('.step3').show('fold');
+        $(this).hide();
+    });
+});
